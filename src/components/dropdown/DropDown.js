@@ -52,10 +52,14 @@ export default function DropDown({ options, handleChange, selectedValue, showErr
                             style={styles.android} 
                             className="w-full bg-white rounded-t-xl p-3 pb-12 shadow-md">
                             {options.map((option, index) => (
-                                <TouchableOpacity 
+                                <Button
                                     key={index} 
                                     onPress={() => handleOptionSelect(option.value)}
-                                    className={`text-lg py-2 rounded ${selectedValue === option.value ? 'bg-emerald-500' : ''}`}
+                                    buttonStyle={{
+                                        paddingHorizontal: 10, 
+                                        backgroundColor: `${selectedValue === option.value ? '#10B981' : 'white'}`, 
+                                        justifyContent: 'flex-start'
+                                    }}
                                 >
                                     <View className="flex-row justify-start items-center">
                                         <Text className={`text-lg p-2 pl-4 font-bold ${selectedValue === option.value ? 'text-white' : ''}`}>
@@ -63,7 +67,7 @@ export default function DropDown({ options, handleChange, selectedValue, showErr
                                         </Text>
                                         <Icon type='entypo' name='check' color="white" style={{marginLeft: 10}}/>
                                     </View>
-                                </TouchableOpacity>
+                                </Button> 
                             ))}
                         </View>
                     </View>
