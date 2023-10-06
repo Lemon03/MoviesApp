@@ -1,20 +1,33 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
+import { ThemeProvider, createTheme, darkColors, lightColors } from '@rneui/themed';
+import AppStack from './src/components/stacks/AppStack';
 
 export default function App() {
+  const theme = createTheme({
+    lightColors: {
+      ...Platform.select({
+        default: lightColors.platform.android,
+        ios: lightColors.platform.ios
+      })
+    },
+    darkColors: {
+      ...Platform.select({
+        default: darkColors.platform.android,
+        ios: darkColors.platform.ios
+      })
+    },
+    mode: 'light'
+  })
+
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ThemeProvider theme={theme}>
+      <SafeAreaView className="flex flex-1" backgroundColor="#2e4a70">
+        <StatusBar style="light" backgroundColor="#2e4a70"/>
+        <AppStack />
+      </SafeAreaView>
+    </ThemeProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
